@@ -9,6 +9,7 @@ import streamlit as st
 
 import jma
 
+plt.rcParams['font.family'] = "Meiryo"
 sns.set_context('paper')
 
 ### ページ設定
