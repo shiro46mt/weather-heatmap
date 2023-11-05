@@ -4,13 +4,12 @@ import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 from matplotlib.colors import BoundaryNorm
+import japanize_matplotlib
 import seaborn as sns
 import streamlit as st
 
 import jma
 
-plt.rcParams['font.family'] = 'sans-serif'
-plt.rcParams['font.sans-serif'] = ['Hiragino Maru Gothic Pro', 'Yu Gothic', 'Meirio', 'Takao', 'IPAexGothic', 'IPAPGothic', 'VL PGothic', 'Noto Sans CJK JP']
 sns.set_context('paper')
 
 ### ページ設定
