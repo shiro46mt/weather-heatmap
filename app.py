@@ -9,7 +9,8 @@ import streamlit as st
 
 import jma
 
-plt.rcParams['font.family'] = "Meiryo"
+plt.rcParams['font.family'] = 'sans-serif'
+plt.rcParams['font.sans-serif'] = ['Hiragino Maru Gothic Pro', 'Yu Gothic', 'Meirio', 'Takao', 'IPAexGothic', 'IPAPGothic', 'VL PGothic', 'Noto Sans CJK JP']
 sns.set_context('paper')
 
 ### ページ設定
