@@ -32,7 +32,7 @@ def load_block_list():
     )
     return df
 
-@st.cache_data
+@st.cache_data(show_spinner='Loading data...')
 def load_data(block_no, month):
     df = jma.get_data(block_no, month)
 
