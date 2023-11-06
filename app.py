@@ -72,6 +72,6 @@ fig, ax = plt.subplots(figsize=(9, 16))
 cmap = ['#002080','#0041FF','#0096FF','#B9EBFF','#FFFFF0','#FFFF96','#FAF500','#FF9900','#FF2800','#B40068']
 bounds = np.linspace(-10, 40, 11)
 norm = BoundaryNorm(bounds, 10)
-sns.heatmap(dfs[kind], square=True, cmap=cmap, norm=norm, ax=ax, cbar_kws={'shrink': 0.3})
+sns.heatmap(dfs[kind], square=True, cmap=cmap, norm=norm, linewidths=1, ax=ax, cbar_kws={'shrink': 0.3})
 ax.set_title(f'{block}（{prec}）の{month}月の{kind}')
 st.pyplot(fig)
