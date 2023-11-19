@@ -64,19 +64,27 @@ block_no = str(block_list.query("地点名 == @block").iat[0, 3])  # ['地点番
 
 with col3:
     month = st.selectbox('月:', range(1, 13))
-today = datetime.now()
-year = today.year
-if month >= today.month:
-    year -= 1
-dfs = load_data(block_no, year, month)
 
 with col4:
     kind = st.selectbox('表示:', ['平均気温','最高気温','最低気温'])
 
-fig, ax = plt.subplots(figsize=(9, 16))
-cmap = ['#002080','#0041FF','#0096FF','#B9EBFF','#FFFFF0','#FFFF96','#FAF500','#FF9900','#FF2800','#B40068']
-bounds = np.linspace(-10, 40, 11)
-norm = BoundaryNorm(bounds, 10)
-sns.heatmap(dfs[kind], square=True, cmap=cmap, norm=norm, linewidths=1, ax=ax, cbar_kws={'shrink': 0.3})
-ax.set_title(f'{block}（{prec}）の{month}月の{kind}')
-st.pyplot(fig)
+try:
+    # データの読み込み
+    today = datetime.now()
+    year = today.year
+    if month >= today.month:
+        year -= 1
+    dfs = load_data(block_no, year, month)
+
+    # グラフの表示
+    fig, ax = plt.subplots(figsize=(9, 16))
+    cmap = ['#002080','#0041FF','#0096FF','#B9EBFF','#FFFFF0','#FFFF96','#FAF500','#FF9900','#FF2800','#B40068']
+    bounds = np.linspace(-10, 40, 11)
+    norm = BoundaryNorm(bounds, 10)
+    sns.heatmap(dfs[kind], square=True, cmap=cmap, norm=norm, linewidths=1, ax=ax, cbar_kws={'shrink': 0.3})
+    ax.set_title(f'{block}（{prec}）の{month}月の{kind}')
+    st.pyplot(fig)
+
+except:
+    st.text('データの読み込みに失敗しました。')
+    st.text('条件を変更するか、時間を空けて再読込してください。')
