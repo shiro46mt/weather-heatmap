@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 import numpy as np
 import pandas as pd
@@ -33,7 +34,7 @@ def load_block_list():
     return df
 
 @st.cache_data(show_spinner='Loading data...')
-def load_data(block_no, month):
+def load_data(block_no, year, month):
     df = jma.get_data(block_no, month)
 
     if month == 2:
@@ -63,7 +64,11 @@ block_no = str(block_list.query("地点名 == @block").iat[0, 3])  # ['地点番
 
 with col3:
     month = st.selectbox('月:', range(1, 13))
-dfs = load_data(block_no, month)
+today = datetime.now()
+year = today.year
+if month >= today.month:
+    year -= 1
+dfs = load_data(block_no, year, month)
 
 with col4:
     kind = st.selectbox('表示:', ['平均気温','最高気温','最低気温'])

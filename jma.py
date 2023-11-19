@@ -68,9 +68,18 @@ def get_data(block_no, month):
         'names': ['年','月','日','平均気温','最高気温','最低気温'],
         'usecols': [0,1,2,3,6,9]
     }
+    do_reload = True
     if os.path.isfile(filename):
         df = pd.read_csv(filename, **read_args)
-    else:
+        # 更新データがないか確認: 既存データの最新年が今年(今月以降の場合は昨年)と一致すれば更新不要
+        year_max = int(df['年'].max())
+        today = datetime.now()
+        year = today.year
+        if month >= today.month:
+            year -= 1
+        if year_max == year:
+            do_reload = False
+    if do_reload:
         lines = fetch(block_no, month)
         with open(filename, 'w', encoding='utf8', newline='') as f:
             f.write(lines)
