@@ -63,7 +63,7 @@ with col2:
 block_no = str(block_list.query("地点名 == @block").iat[0, 3])  # ['地点番号']
 
 with col3:
-    month = st.selectbox('月:', range(1, 13))
+    month = st.selectbox('月:', range(1, 13), index=datetime.now().month - 1)
 
 with col4:
     kind = st.selectbox('表示:', ['平均気温','最高気温','最低気温'])
